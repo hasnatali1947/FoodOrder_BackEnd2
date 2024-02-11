@@ -17,7 +17,7 @@ orderRoute.post("/orderRoute", (async (req, res) => {
 
         const payment = await Stripe.charges.create({
             amount: subTotal * 100,
-            currency: "inr",
+            currency: "pkr",
             customer: customer.id,
             receipt_email: token.email
         }, {
@@ -54,21 +54,7 @@ orderRoute.post("/orderRoute", (async (req, res) => {
 
 // ----------------------------
 
-// orderRoute.put("/markDelivered/:orderId", async (req, res) => {
-//     const orderId = req.params.orderId;
 
-//     try {
-//         const updatedOrder = await OrdersModel.findByIdAndUpdate(orderId, { isDelivered: true }, { new: true });
-
-//         if (updatedOrder) {
-//             res.status(200).json(updatedOrder);
-//         } else {
-//             res.status(404).json({ message: "Order not found" });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ message: "Error marking order as delivered: " + error.message });
-//     }
-// });
 
 
 module.exports = orderRoute

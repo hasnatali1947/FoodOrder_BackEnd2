@@ -3,15 +3,16 @@ const loginRouter = express.Router();
 const Users = require("../models/register")
 
 loginRouter.post("/login", async (req, res) => {
-    const {email, password} = req.body;
-    const user = await Users.findOne({email});
-    if(!user){
+    const { email, password } = req.body;
+    const user = await Users.findOne({ email });
+    console.log("user : ",user)
+    if (!user) {
         return res.status(400).json({ message: "User not found" });
     }
-    if(password !== user.password){
+    if (password !== user.password) {
         return res.status(401).json({ message: "Invalid password" });
     }
-    res.status(200).json({message: "Login successful", token: "your-generated-token"})
+    res.status(200).json({ message: "Login successful", token: "your-generated-token" })
 })
 
 module.exports = loginRouter;
